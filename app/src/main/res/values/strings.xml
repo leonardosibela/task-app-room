@@ -2,4 +2,6 @@
     <string name="app_name">Task App</string>
     <string name="add_task">Add task</string>
     <string name="priority_task">Priority task</string>
+    <string name="task_name_hint">Task name</string>
+    <string name="important_task">Important_task</string>
 </resources>
