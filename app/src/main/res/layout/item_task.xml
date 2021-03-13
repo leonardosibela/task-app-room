@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:minWidth="0dp"
         android:minHeight="20dp"
+        tools:text="&#8203;"
         app:layout_constraintBottom_toBottomOf="@id/text_view_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_view_name" />
