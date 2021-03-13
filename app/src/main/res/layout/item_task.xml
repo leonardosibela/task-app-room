@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toStartOf="@id/label_priority"
         app:layout_constraintStart_toEndOf="@id/check_box_completed"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Example item" />
+        tools:text="@sample/tasks.json/tasks/name" />
 
     <ImageView
         android:id="@+id/label_priority"
