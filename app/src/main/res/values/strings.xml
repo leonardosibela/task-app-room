@@ -4,4 +4,10 @@
     <string name="priority_task">Priority task</string>
     <string name="task_name_hint">Task name</string>
     <string name="important_task">Important_task</string>
+    <string name="menu_title_search">Search</string>
+    <string name="menu_title_sort">Sort</string>
+    <string name="menu_title_sort_by_name">Sort by name</string>
+    <string name="menu_title_sort_by_date_created">Sort by date created</string>
+    <string name="menu_title_hide_completed">Hide completed</string>
+    <string name="menu_title_delete_all_completed">Delete all completed</string>
 </resources>
