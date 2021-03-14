@@ -1,7 +1,6 @@
 package com.sibela.taskapp.data
 
 import androidx.room.*
-import com.sibela.taskapp.ui.tasks.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao

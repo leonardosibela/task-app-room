@@ -3,6 +3,7 @@ package com.sibela.taskapp.ui.tasks
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.sibela.taskapp.data.SortOrder
 import com.sibela.taskapp.data.TaskDao
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -26,5 +27,3 @@ class TasksViewModel @ViewModelInject constructor(
     val tasks = taskFlow.asLiveData()
 
 }
-
-enum class SortOrder { BY_NAME, BY_DATE }
