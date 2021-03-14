@@ -8,11 +8,16 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sibela.taskapp.R
+import com.sibela.taskapp.data.SortOrder
 import com.sibela.taskapp.databinding.FragmentTasksBinding
 import com.sibela.taskapp.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TasksFragment : Fragment(R.layout.fragment_tasks) {
@@ -48,21 +53,26 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
         searchView.onQueryTextChanged { searchQuery ->
             viewModel.searchQuery.value = searchQuery
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            menu.findItem(R.id.action_hide_completed).isChecked =
+                viewModel.preferencesFlow.first().hideCompleted
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_sort_by_name -> {
-                viewModel.sortOrder.value = SortOrder.BY_NAME
+                viewModel.onSortOrderSelected(SortOrder.BY_NAME)
                 true
             }
             R.id.action_sort_by_date_created -> {
-                viewModel.sortOrder.value = SortOrder.BY_DATE
+                viewModel.onSortOrderSelected(SortOrder.BY_DATE)
                 true
             }
             R.id.action_hide_completed -> {
                 item.isChecked = !item.isChecked
-                viewModel.hideCompleted.value = item.isChecked
+                viewModel.onHideCompletedClicked(item.isChecked)
                 true
             }
             R.id.action_delete_all_completed_tasks -> {
