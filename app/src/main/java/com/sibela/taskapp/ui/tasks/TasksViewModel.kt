@@ -7,6 +7,8 @@ import com.sibela.taskapp.data.PreferencesManager
 import com.sibela.taskapp.data.SortOrder
 import com.sibela.taskapp.data.Task
 import com.sibela.taskapp.data.TaskDao
+import com.sibela.taskapp.ui.ADD_TASK_RESULT_OK
+import com.sibela.taskapp.ui.EDIT_TASK_RESULT_OK
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -63,9 +65,21 @@ class TasksViewModel @ViewModelInject constructor(
         tasksEventChannel.send(TasksEvent.NavigateToAddTaskScreen)
     }
 
+    fun onAddEditResult(result: Int) {
+        when (result) {
+            ADD_TASK_RESULT_OK -> showTaskSaveConfirmationMessage("Task added")
+            EDIT_TASK_RESULT_OK -> showTaskSaveConfirmationMessage("Task added")
+        }
+    }
+
+    private fun showTaskSaveConfirmationMessage(message: String) = viewModelScope.launch {
+        tasksEventChannel.send(TasksEvent.ShowTaskSavedConfirmationMessage(message))
+    }
+
     sealed class TasksEvent {
         object NavigateToAddTaskScreen : TasksEvent()
         data class NavigateToEditTaskScreen(val task: Task) : TasksEvent()
         data class ShowUndoDeleteTaskMessage(val task: Task) : TasksEvent()
+        data class ShowTaskSavedConfirmationMessage(val message: String) : TasksEvent()
     }
 }
